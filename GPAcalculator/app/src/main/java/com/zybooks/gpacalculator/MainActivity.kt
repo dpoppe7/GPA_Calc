@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, "onCreate was called")
 
-        
         grade1EditText = findViewById(R.id.grade1_edit_text)
         grade2EditText = findViewById(R.id.grade2_edit_text)
         grade3EditText = findViewById(R.id.grade3_edit_text)
@@ -62,6 +61,8 @@ class MainActivity : AppCompatActivity() {
 
         val gradesArray = ArrayList<Int>(5)
 
+        var valid:Boolean = true
+
         //Add grade points to gradesArray if input is either ("A", "B", "C", "D", "F")
         //If input is empty (gradeToPoint returns -1), ignore
         //Otherwise print "Grade (number): is an invalid input"
@@ -69,57 +70,83 @@ class MainActivity : AppCompatActivity() {
             gradesArray.add(point1)
         }
         else {
-            if (point1 == -2)
-                Toast.makeText(this@MainActivity,
-                    getString(R.string.grade_1) + " is an invalid Input", Toast.LENGTH_SHORT).show()
+            if (point1 == -2) {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.grade_1) + " is an invalid Input", Toast.LENGTH_SHORT
+                ).show()
+
+                valid = false
+            }
         }
 
         if (point2 > -1) {
             gradesArray.add(point2)
         }
         else {
-            if (point2 == -2)
-                Toast.makeText(this@MainActivity,
-                    getString(R.string.grade_2) + " is an invalid Input", Toast.LENGTH_SHORT).show()
+            if (point2 == -2) {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.grade_2) + " is an invalid Input", Toast.LENGTH_SHORT
+                ).show()
+                valid = false
+            }
         }
 
         if (point3 > -1) {
             gradesArray.add(point3)
         }
         else {
-            if (point3 == -2)
-                Toast.makeText(this@MainActivity,
-                    getString(R.string.grade_3) + " is an invalid Input", Toast.LENGTH_SHORT).show()
+            if (point3 == -2) {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.grade_3) + " is an invalid Input", Toast.LENGTH_SHORT
+                ).show()
+                valid = false
+            }
         }
 
         if (point4 > -1) {
             gradesArray.add(point4)
         }
         else {
-            if (point4 == -2)
-                Toast.makeText(this@MainActivity,
-                    getString(R.string.grade_4) + " is an invalid Input", Toast.LENGTH_SHORT).show()
+            if (point4 == -2) {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.grade_4) + " is an invalid Input", Toast.LENGTH_SHORT
+                ).show()
+                valid = false
+            }
         }
 
         if (point5 > -1) {
             gradesArray.add(point5)
         }
         else {
-            if (point5 == -2)
-                Toast.makeText(this@MainActivity,
-                    getString(R.string.grade_5) + " is an invalid Input", Toast.LENGTH_SHORT).show()
+            if (point5 == -2) {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.grade_5) + " is an invalid Input", Toast.LENGTH_SHORT
+                ).show()
+                valid = false
+            }
         }
 
 
-        //add all grade values in gradesArray
-        var tempSum = 0
-        for (i in gradesArray) {
-            tempSum += i
-        }
+        if (valid) {
+            //add all grade values in gradesArray
+            var tempSum = 0
+            for (i in gradesArray) {
+                tempSum += i
+            }
 
-        //calculate gpa
-        val gpa = String.format("%.2f", (tempSum) / gradesArray.size.toFloat())
-        totalGPATextView.text = gpa
+            //calculate gpa
+            val gpa = String.format("%.2f", (tempSum) / gradesArray.size.toFloat())
+            totalGPATextView.text = gpa
+        }
+        else{
+            totalGPATextView.text = getString(R.string.invalid)
+        }
     }
 
 
